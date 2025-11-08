@@ -7,7 +7,7 @@ export default function Counter() {
   const dispatch = useAppDispatch()
 
   return (
-    <div style={{ textAlign: 'center', marginTop: 50 }}>
+    <div className='text-center'>
       <h1>Counter: {count}</h1>
       <Button variant="outline" onClick={() => dispatch(decrement())}>-</Button>
       <Button onClick={() => dispatch(increment())}>+</Button>
