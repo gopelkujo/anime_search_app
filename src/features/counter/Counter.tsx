@@ -10,8 +10,8 @@ export default function Counter() {
     <div className='text-center'>
       <h1>Counter: {count}</h1>
       <Button variant="outline" onClick={() => dispatch(decrement())}>-</Button>
-      {/* <Button onClick={() => dispatch(increment())}>+</Button>
-      <Button onClick={() => dispatch(incrementByAmount(5))}>+5</Button> */}
+      <Button onClick={() => dispatch(increment())}>+</Button>
+      <Button onClick={() => dispatch(incrementByAmount(5))}>+5</Button>
     </div>
   )
 }
