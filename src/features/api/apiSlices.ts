@@ -1,5 +1,9 @@
 // Import the RTK Query methods from the React-specific entry point
-import type { DefaultJikanResponse, AnimeSearchModel } from "@/types/api";
+import type {
+  DefaultJikanResponse,
+  AnimeSearchModel,
+  AnimeDetailModel,
+} from "@/types/api";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Use the `Post` type we've already defined in `postsSlice`,
@@ -23,8 +27,14 @@ export const apiSlice = createApi({
     >({
       query: (query) => `/anime?q=${query}&limit=10`,
     }),
+    getAnimeDetail: builder.query<
+      DefaultJikanResponse<AnimeDetailModel>,
+      string
+    >({
+      query: (id) => `/anime/${id}`,
+    }),
   }),
 });
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetAnimeSearchQuery } = apiSlice;
+export const { useGetAnimeSearchQuery, useGetAnimeDetailQuery } = apiSlice;

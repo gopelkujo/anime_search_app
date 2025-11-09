@@ -4,6 +4,7 @@ import Counter from "./features/counter/Counter";
 import Layout from "./components/sections/layout";
 import Home from "./features/home/Home";
 import NotFound from "./NotFound";
+import Detail from "./features/detail/Detail";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/detail/:id" element={<Detail />} />
           <Route path="/counter" element={<Counter />} />
         </Route>
 
