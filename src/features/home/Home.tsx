@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, SearchX } from "lucide-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -108,21 +108,24 @@ export default function Home() {
           </div>
         ) : isSuccess ? (
           <>
-            <span>
-              Result for {keyword}{" "}
-              {result.pagination.items.total != 0
-                ? `(${result.pagination.items.total})`
-                : ""}
-            </span>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {result.data.length == 0 ? (
-                <div>Not found</div>
-              ) : (
-                Array.from(result.data).map((item, index) => (
+            {result.pagination.items.total != 0 ? (
+              <span className="mb-4">
+                `Result for {keyword} ({result.pagination.items.total})`
+              </span>
+            ) : null}
+
+            {result.pagination.items.total == 0 ? (
+              <div className="flex flex-col items-center justify-center">
+                <SearchX className="mb-4" size={60} />
+                <span className="font-medium text-neutral-500">Anime with "{keyword}" identities was not found.</span>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                {Array.from(result.data).map((item, index) => (
                   <AnimeCard key={index} item={item} />
-                ))
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </>
         ) : (
           <span>Error...</span>
@@ -169,8 +172,8 @@ export default function Home() {
           </Pagination>
         ) : isFetching ? (
           <div className="flex space-x-2 justify-center items-center">
-            <Skeleton className="h-9 w-[100px] rounded-full" />
-            <Skeleton className="h-9 w-[100px] rounded-full" />
+            <Skeleton className="h-9 w-[100px] rounded-[10px]" />
+            <Skeleton className="h-9 w-[100px] rounded-[10px]" />
           </div>
         ) : null}
       </div>
