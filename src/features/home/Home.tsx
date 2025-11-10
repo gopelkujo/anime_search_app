@@ -68,7 +68,7 @@ export default function Home() {
                 <Search />
               </InputGroupButton>
             </TooltipTrigger>
-            <TooltipContent>This is content in a tooltip.</TooltipContent>
+            <TooltipContent>No need to press button or enter to search</TooltipContent>
           </Tooltip>
         </InputGroupAddon>
       </InputGroup>
