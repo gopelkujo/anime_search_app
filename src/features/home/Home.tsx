@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import AnimeCard from "./components/ui/AnimeCard";
 import { useGetAnimeSearchQuery } from "@/features/api/apiSlices";
-import { modify } from "./homeSlice";
+import { decreasePage, increasePage, modifyKeyword } from "./homeSlice";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { useEffect, useMemo, type FormEvent } from "react";
 import { debounce } from "@/lib/debounce";
@@ -22,21 +22,33 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
-  const keyword = useAppSelector((state) => state.home.value);
+  const keyword = useAppSelector((state) => state.home.keyword);
+  const page = useAppSelector((state) => state.home.page);
   const dispatch = useAppDispatch();
 
   const {
     data: result,
     isFetching,
     isSuccess,
-  } = useGetAnimeSearchQuery(keyword, { skip: !keyword });
+  } = useGetAnimeSearchQuery(
+    { keyword: keyword, page: page },
+    { skip: !keyword }
+  );
 
   const debouncedSetKeyword = useMemo(
     () =>
       debounce((value: string) => {
-        dispatch(modify(value.trim()));
+        dispatch(modifyKeyword(value.trim()));
       }, 600),
     []
   );
@@ -68,7 +80,9 @@ export default function Home() {
                 <Search />
               </InputGroupButton>
             </TooltipTrigger>
-            <TooltipContent>No need to press button or enter to search</TooltipContent>
+            <TooltipContent>
+              No need to press button or enter to search
+            </TooltipContent>
           </Tooltip>
         </InputGroupAddon>
       </InputGroup>
@@ -96,7 +110,12 @@ export default function Home() {
           </div>
         ) : isSuccess ? (
           <>
-            <span>Result for {keyword}...</span>
+            <span>
+              Result for {keyword}{" "}
+              {result.pagination.items.total != 0
+                ? `(${result.pagination.items.total})`
+                : ""}
+            </span>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {result.data.length == 0 ? (
                 <div>Not found</div>
@@ -110,6 +129,50 @@ export default function Home() {
         ) : (
           <span>Error...</span>
         )}
+
+        {isSuccess && result?.pagination.last_visible_page > 1 && !isFetching ? (
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  onClick={
+                    result.pagination.current_page == 1
+                      ? undefined
+                      : () => dispatch(decreasePage())
+                  }
+                  className={`
+                        ${
+                          result.pagination.current_page == 1
+                            ? "pointer-events-none opacity-50 cursor-not-allowed"
+                            : ""
+                        }
+                      `}
+                />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext
+                  onClick={
+                    result.pagination.has_next_page
+                      ? () => dispatch(increasePage())
+                      : undefined
+                  }
+                  className={`
+                        ${
+                          !result.pagination.has_next_page
+                            ? "pointer-events-none opacity-50"
+                            : ""
+                        }
+                      `}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        ) : isFetching ? (
+          <div className="flex space-x-2 justify-center items-center">
+            <Skeleton className="h-9 w-[100px] rounded-full" />
+            <Skeleton className="h-9 w-[100px] rounded-full" />
+          </div>
+        ) : null}
       </div>
     </div>
   );

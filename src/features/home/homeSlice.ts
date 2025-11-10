@@ -1,22 +1,34 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface SearchFieldState {
-  value: string;
+interface HomeState {
+  keyword: string;
+  page: number;
 }
 
-const initialState: SearchFieldState = {
-  value: "",
+const initialState: HomeState = {
+  keyword: "",
+  page: 1,
 };
 
 const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    modify: (state, action: PayloadAction<string>) => {
-      state.value = action.payload;
+    modifyKeyword: (state, action: PayloadAction<string>) => {
+      state.keyword = action.payload;
+    },
+    increasePage: (state) => {
+      state.page += 1;
+    },
+    decreasePage: (state) => {
+      state.page -= 1;
     },
   },
 });
 
-export const { modify } = homeSlice.actions;
+export const {
+  modifyKeyword: modifyKeyword,
+  increasePage: increasePage,
+  decreasePage: decreasePage,
+} = homeSlice.actions;
 export default homeSlice.reducer;

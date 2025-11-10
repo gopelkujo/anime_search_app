@@ -11,6 +11,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import type { Post } from '@/features/posts/postsSlice'
 // export type { Post }
 
+interface getAnimeSearchArgs {
+  keyword: string;
+  page: number;
+}
+
 // Define our single API slice object
 export const apiSlice = createApi({
   // The cache reducer expects to be added at `state.api` (already default - this is optional)
@@ -23,9 +28,9 @@ export const apiSlice = createApi({
     // The return value is a `Post[]` array, and it takes no arguments.
     getAnimeSearch: builder.query<
       DefaultJikanResponse<AnimeSearchModel[]>,
-      string
+      getAnimeSearchArgs
     >({
-      query: (query) => `/anime?q=${query}&limit=10`,
+      query: ({keyword, page}) => `/anime?q=${keyword}&limit=10&page=${page}`,
     }),
     getAnimeDetail: builder.query<
       DefaultJikanResponse<AnimeDetailModel>,
