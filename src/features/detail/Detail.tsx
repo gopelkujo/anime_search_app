@@ -3,6 +3,7 @@ import { useGetAnimeDetailQuery } from "../api/apiSlices";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star } from "lucide-react";
 import Image from "@/components/ui/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Detail() {
   const { id } = useParams();
@@ -26,7 +27,20 @@ export default function Detail() {
       </Button>
 
       {isFetching ? (
-        <span>Loading...</span>
+        <>
+          <div className="flex flex-col sm:flex-row mb-4 w-full">
+            <Skeleton className="w-[170px] h-[235px] rounded-2xl mb-4 sm:mb-0 sm:mr-4 self-center" />
+            <div className="flex flex-col items-start space-y-2">
+              <Skeleton className="w-[300px] h-10 rounded-2xl" />
+              <Skeleton className="w-[500px] h-6 rounded-2xl" />
+              <Skeleton className="w-[250px] h-6 rounded-2xl" />
+              <Skeleton className="w-[250px] h-6 rounded-2xl" />
+            </div>
+          </div>
+
+          <Skeleton className="w-[97px] h-8 rounded-2xl mb-2" />
+          <Skeleton className="w-full h-[150px] rounded-2xl" />
+        </>
       ) : isSuccess ? (
         <>
           <div className="flex flex-col sm:flex-row mb-4 text-neutral-600 w-full">
