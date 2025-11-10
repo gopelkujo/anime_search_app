@@ -96,13 +96,11 @@ export default function Home() {
               <Card key={index} className="border-none shadow-none">
                 <CardHeader>
                   <CardTitle className="flex flex-col">
-                    <div className="w-full h-64 rounded-2xl overflow-hidden relative bg-gray-200 mb-4"></div>
-                    <span className="bg-gray-200 rounded-2xl text-transparent">
-                      title
-                    </span>
+                    <Skeleton className="w-full h-64 rounded-2xl mb-4" />
+                    <Skeleton className="w-full h-4 rounded-2xl" />
                   </CardTitle>
-                  <CardDescription className="bg-gray-200 rounded-2xl text-transparent">
-                    Description
+                  <CardDescription>
+                    <Skeleton className="w-1/2 h-4 rounded-2xl" />
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -130,7 +128,9 @@ export default function Home() {
           <span>Error...</span>
         )}
 
-        {isSuccess && result?.pagination.last_visible_page > 1 && !isFetching ? (
+        {isSuccess &&
+        result?.pagination.last_visible_page > 1 &&
+        !isFetching ? (
           <Pagination>
             <PaginationContent>
               <PaginationItem>
