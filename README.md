@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Anime Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
 
-Currently, two official plugins are available:
+- React JS
+- Vite
+- Tailwind
+- Shadcn UI
+- Redux State Management
+- RTK Query
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisite (if not yet)
 
-## React Compiler
+- Install [Node](https://nodejs.org/en) v22.16.0
+- Have npm v10.9.2
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How to Run
 
-## Expanding the ESLint configuration
+1. Clone project prod/dev branch
+2. Inside the project folder run `npm install` to install the dependencies
+3. Run `npm run dev` to run the local server dev
+4. The page will be loaded at localhost:4000
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Bonus Implementation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Skeleton loaders or meaningful loading states
+- Empty state and no results handling with helpful messaging
+- Mobile responsiveness
+- Proper error handling (network failures, rate limiting, invalid API responses)
+- Race condition handling
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Submission Checklist
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [x] Project uses npm only (no yarn/pnpm)
+- [x] `npm install` and `npm run dev` starts the app successfully
+- [x] Dev server runs on port 4000
+- [x] No environment variables required
+- [x] Project is deployed and accessible via live URL
+- [x] All core functionality works as described
+- [x] Code is written in TypeScript
+- [x] Redux is properly implemented for state management
+- [x] If bonus features implemented, they are listed in README under "Bonus Implementation" header
