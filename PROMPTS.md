@@ -126,3 +126,10 @@ Failed to load module script: Expected a JavaScript-or-Wasm module script but th
 
 So when first I deployed the app to Netlify, it went success no error but the page shows blank (nothing), so I fix it by set up the build configuration on Netlify.
 
+7. Problem at routing with react-router-dom in Netlify
+
+```
+yes the fix is i need to set up the netlify build setting on build command and publish directory, now my page showed up. But the new problem arrives, i had already set up my router with react-router-dom and it's work fine in local, but when it's live in netlify the route become "Page not found", even though i already set up the not found ui too and it's work in local.
+```
+
+After fix the build configuration on Netlify I faced new error that affected the page other than home page ('/') can't be loaded. Instead of load the page, the Netlify handle it as the page not found. After the fix, the page can changing route to the detail page and load the anime detail.
