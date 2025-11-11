@@ -62,7 +62,7 @@ export default function Home() {
           <>
             {result.pagination.items.total != 0 ? (
               <span className="mb-4">
-                `Result for {keyword} ({result.pagination.items.total})`
+                Result for {keyword} ({result.pagination.items.total})
               </span>
             ) : null}
 
