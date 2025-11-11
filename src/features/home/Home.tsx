@@ -15,6 +15,7 @@ export default function Home() {
   const keyword = useAppSelector((state) => state.home.keyword);
   const page = useAppSelector((state) => state.home.page);
   const dispatch = useAppDispatch();
+  const DEBOUNCE_DURATION: number = 250;
 
   const {
     data: result,
@@ -29,7 +30,7 @@ export default function Home() {
     () =>
       debounce((value: string) => {
         dispatch(modifyKeyword(value.trim()));
-      }, 600),
+      }, DEBOUNCE_DURATION),
     []
   );
 
