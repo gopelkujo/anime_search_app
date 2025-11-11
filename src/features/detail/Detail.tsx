@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star } from "lucide-react";
 import Image from "@/components/ui/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import ErrorCard from "../../components/ui/error-card";
 
 export default function Detail() {
   const { id } = useParams();
@@ -75,7 +76,9 @@ export default function Detail() {
           <span className="text-neutral-600">{result.data.synopsis}</span>
         </>
       ) : (
-        <span>Error</span>
+        <div className="w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <ErrorCard />
+        </div>
       )}
     </div>
   );
